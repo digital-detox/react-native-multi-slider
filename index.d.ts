@@ -54,6 +54,7 @@ export interface MultiSliderProps {
 
     optionsArray?: number[];
 
+    wrapperStyle?: ViewStyle;
     containerStyle?: ViewStyle;
     trackStyle?: ViewStyle;
     selectedStyle?: ViewStyle;
@@ -75,6 +76,7 @@ export interface MultiSliderProps {
     imageBackgroundSource?: string;
     enableLabel?: boolean;
     vertical?: boolean;
+    testID?: string;
 }
 
 export default class MultiSlider extends React.Component<MultiSliderProps> {}
