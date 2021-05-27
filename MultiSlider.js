@@ -45,6 +45,7 @@ export default class MultiSlider extends React.Component {
     snapped: false,
     vertical: false,
     minMarkerOverlapDistance: 0,
+    testID: undefined
   };
 
   constructor(props) {
@@ -540,7 +541,7 @@ export default class MultiSlider extends React.Component {
     );
 
     return (
-      <View>
+      <View style={this.props?.wrapperStyle} testID={this.props.testID}>
         {this.props.enableLabel && (
           <Label
             oneMarkerValue={this.state.valueOne}
