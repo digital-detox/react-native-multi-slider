@@ -14,6 +14,8 @@ import DefaultMarker from './DefaultMarker';
 import DefaultLabel from './DefaultLabel';
 import { createArray, valueToPosition, positionToValue } from './converters';
 
+const SLIDER_HEIGHT = 50;
+
 export default class MultiSlider extends React.Component {
   static defaultProps = {
     values: [0],
@@ -538,11 +540,22 @@ export default class MultiSlider extends React.Component {
       right: trackThreeLength + markerOffsetX - 24,
     };
 
-    const containerStyle = [styles.container, this.props.containerStyle];
+    const containerStyle = [
+      styles.container,
+      {
+        height: SLIDER_HEIGHT,
+        width: sliderLength,
+      },
+      this.props.containerStyle,
+    ];
 
     if (this.props.vertical) {
       containerStyle.push({
-        transform: [{ rotate: '-90deg' }],
+        transform: [
+          { translateX: -sliderLength / 2 + SLIDER_HEIGHT / 2 },
+          { rotate: '-90deg' },
+          { translateX: -sliderLength / 2 + SLIDER_HEIGHT / 2 },
+        ],
       });
     }
 
@@ -684,7 +697,22 @@ export default class MultiSlider extends React.Component {
     );
 
     return (
-      <View style={this.props?.wrapperStyle} testID={this.props.testID}>
+      <View
+        style={
+          this.props.vertical
+            ? {
+                ...this.props?.wrapperStyle,
+                height: sliderLength,
+                width: SLIDER_HEIGHT,
+              }
+            : {
+                ...this.props?.wrapperStyle,
+                height: SLIDER_HEIGHT,
+                width: sliderLength,
+              }
+        }
+        testID={this.props.testID}
+      >
         {this.props.enableLabel && (
           <Label
             oneMarkerValue={this.state.valueOne}
